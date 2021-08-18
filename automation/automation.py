@@ -12,9 +12,9 @@ def emails(file):
         if email not in list_emails:
             list_emails.append(email) 
 
-    with open('emails.txt','w') as output_file:
+    with open('emails.txt','w') as text_file:
         for email in sorted(list_emails):
-            output_file.write(f"{str(email)}\n")
+            text_file.write(f"{str(email)}\n")
 
     return list_emails
 
@@ -34,29 +34,29 @@ def edit_format_phone_number(phone_number):
 
 
 
-def get_phone_numbers(file):
-    phone_number_pattern = r"(\d{3}[-\.\s]??\d{3}[-\.\s]??\d{4}|\(\d{3}\)\s*\d{3}[-\.\s]??\d{4}|\d{3}[-\.\s]??\d{4})"
+def phone(file):
+    phone_regex = r"(\d{3}[-\.\s]??\d{3}[-\.\s]??\d{4}|\(\d{3}\)\s*\d{3}[-\.\s]??\d{4}|\d{3}[-\.\s]??\d{4})"
     
     with open(file,'r') as file:
         file = file.read()
-        phone_numbers = re.findall(phone_number_pattern, file)
+        phone_numbers = re.findall(phone_regex, file)
 
-    with open('phone_numbers.txt','w') as output_file:
-        clean_phone_numbers = []
+    with open('phone_numbers.txt','w') as phone_file:
+        list_numbers = []
   
         for phone_number in phone_numbers:
-            if phone_number not in clean_phone_numbers:
+            if phone_number not in list_numbers:
                 phone_number = edit_format_phone_number(phone_number) 
 
-                clean_phone_numbers.append(phone_number)
+                list_numbers.append(phone_number)
         
-        for phone_number in sorted(clean_phone_numbers):
-            output_file.write(f"{phone_number}\n")
+        for phone_number in sorted(list_numbers):
+            phone_file.write(f"{phone_number}\n")
 
-    return clean_phone_numbers
+    return list_numbers
 
 
 
 if __name__ == "__main__":
     print("Emails: \n", emails("./potential-contacts.txt"))
-    print("Phone Numbers: \n", get_phone_numbers("./potential-contacts.txt"))
+    print("Phone Numbers: \n", phone("./potential-contacts.txt"))
