@@ -45,9 +45,9 @@ def phone(file):
         list_numbers = []
   
         for phone_number in phone_numbers:
-            if phone_number not in list_numbers:
-                phone_number = edit_format_phone_number(phone_number) 
+            phone_number = edit_format_phone_number(phone_number) 
 
+            if phone_number not in list_numbers:
                 list_numbers.append(phone_number)
         
         for phone_number in sorted(list_numbers):
